@@ -1,10 +1,10 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
-import { LoggerService } from '../logger.service';
+import { LoggerDBService } from '../logger.db.service';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
-	constructor(private readonly loggerService: LoggerService) {}
+	constructor(private readonly loggerDBService: LoggerDBService) {}
 
 	// use(req: Request, res: Response, next: NextFunction) {
 	// 	const { method, originalUrl } = req;
@@ -73,7 +73,7 @@ export class LoggerMiddleware implements NestMiddleware {
 		res.on('close', () => {
 			const responseBody = chunks.length > 0 ? chunks[0] : undefined;
 
-			this.loggerService
+			this.loggerDBService
 				.logFromRequest(req, res, responseBody)
 				.catch(console.error);
 		});

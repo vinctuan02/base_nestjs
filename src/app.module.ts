@@ -6,7 +6,6 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { envValidationSchema } from './common/config/joi.validate-env';
 import { DatabaseOptions } from './common/typeorm/ormconfig';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { FileModule } from './file/file.module';
 import { HelperModule } from './helper/helper.module';
 import { LoggerModule } from './logger/logger.module';
@@ -32,7 +31,7 @@ import { UserModule } from './user/user.module';
 		UserModule,
 		AuthModule,
 		HelperModule,
-		DashboardModule,
+		// DashboardModule,
 		LoggerModule,
 	],
 	controllers: [AppController],

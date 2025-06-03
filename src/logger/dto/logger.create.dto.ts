@@ -1,60 +1,71 @@
 import {
 	IsBoolean,
 	IsEnum,
-	IsInt,
-	IsNotEmpty,
 	IsNumber,
 	IsOptional,
 	IsString,
 } from 'class-validator';
-import { StatusResponse } from '../enums/logger.enum';
+import { LevelLog } from '../enums/logger.enum';
 
 export class CreateLogDto {
-
-	@IsNotEmpty()
-	ip: string;
-
-	@IsNotEmpty()
-	method: string;
+	@IsOptional()
+	@IsString()
+	action?: string;
 
 	@IsOptional()
-	originalUrl?: string;
+	@IsString()
+	ip?: string;
 
 	@IsOptional()
-	userAgent?: string;
-
-	@IsNotEmpty()
-	status: boolean;
+	@IsString()
+	country?: string;
 
 	@IsOptional()
-	content?: string;
-
-	@IsOptional()
-	response?: string;
-
-	@IsOptional()
+	@IsString()
 	city?: string;
 
 	@IsOptional()
-	country?: string;
-}
-
-export class CheckRecentLogDto {
 	@IsString()
-	action: string;
+	originalUrl?: string;
 
-	@IsString()
-	originalUrl: string;
-
-	@IsString()
-	ip: string;
-
+	@IsOptional()
 	@IsNumber()
-	statusCode: number;
+	statusCode?: number;
 
+	@IsOptional()
 	@IsString()
-	userCreatorId: string;
+	content?: string;
 
+	@IsOptional()
+	response?: any;
+
+	@IsOptional()
 	@IsString()
-	userAgent: string;
+	email?: string;
+
+	@IsOptional()
+	@IsString()
+	userCreatorId?: string;
+
+	@IsOptional()
+	@IsString()
+	message?: string;
+
+	@IsOptional()
+	@IsBoolean()
+	success?: boolean;
+
+	@IsOptional()
+	@IsString()
+	userAgent?: string;
+
+	@IsOptional()
+	@IsEnum(LevelLog)
+	level?: LevelLog;
+
+	@IsOptional()
+	context?: string;
+
+	@IsOptional()
+	trace?: string;
 }
