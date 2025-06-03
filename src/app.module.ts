@@ -20,16 +20,16 @@ import { UserModule } from './user/user.module';
 			validationSchema: envValidationSchema,
 		}),
 
-		TypeOrmModule.forRootAsync({
-			imports: [ConfigModule],
-			inject: [ConfigService],
-			useClass: DatabaseOptions,
-		}),
-		MinIOModule,
-		FileModule,
-		OrderModule,
-		UserModule,
-		AuthModule,
+		// TypeOrmModule.forRootAsync({
+		// 	imports: [ConfigModule],
+		// 	inject: [ConfigService],
+		// 	useClass: DatabaseOptions,
+		// }),
+		// MinIOModule,
+		// FileModule,
+		// OrderModule,
+		// UserModule,
+		// AuthModule,
 		HelperModule,
 		// DashboardModule,
 		LoggerModule,
@@ -37,4 +37,4 @@ import { UserModule } from './user/user.module';
 	controllers: [AppController],
 	providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

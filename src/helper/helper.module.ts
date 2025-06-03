@@ -7,7 +7,11 @@ import { PasswordService } from './services/password.service';
 @Module({
 	imports: [],
 	controllers: [HelperController],
-	providers: [DateService, PasswordService, JsonService],
-	exports: [DateService, PasswordService, JsonService],
+	providers: [
+		// DateService,
+		PasswordService, JsonService],
+	exports: [
+		// DateService,
+		PasswordService, JsonService],
 })
-export class HelperModule {}
+export class HelperModule { }
