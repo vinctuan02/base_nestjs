@@ -1,4 +1,5 @@
 import { Injectable, LoggerService as NestLoggerService } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as winston from 'winston';
 import { CreateLogDto } from './dto/logger.create.dto';
 import { LevelLog } from './enums/logger.enum';
@@ -7,7 +8,8 @@ import { LevelLog } from './enums/logger.enum';
 export class LoggerService implements NestLoggerService {
 	private logger: winston.Logger;
 
-	constructor() {
+	constructor(private readonly configService: ConfigService) {
+		const DIR_LOG = this.configService.get<string>('DIR_LOG');
 		this.logger = winston.createLogger({
 			// level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
 
@@ -25,19 +27,11 @@ export class LoggerService implements NestLoggerService {
 				environment: process.env.NODE_ENV || 'development',
 			},
 			transports: [
-				new winston.transports.Console({
-					format: winston.format.combine(
-						winston.format.colorize(),
-						winston.format.printf(
-							({ timestamp, level, message, metadata }) => {
-								const extra = Object.keys(metadata).length
-									? JSON.stringify(metadata, null, 2)
-									: '';
-								return `[${timestamp}] ${level}: ${message} ${extra}`;
-							},
-						),
-					),
-				}),
+				// new winston.transports.Console({
+				// 	format: winston.format.combine(winston.format.json()),
+				// }),
+
+				new winston.transports.File({ filename: DIR_LOG }),
 			],
 		});
 	}
